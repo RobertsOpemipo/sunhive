@@ -1,5 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core';
-import Tooltip from 'bootstrap/js/dist/tooltip'; // ✅ correct import
+import Tooltip from 'bootstrap/js/dist/tooltip'; 
 
 @Component({
   selector: 'app-sidebar',

@@ -42,7 +42,7 @@ export class GraphGroup implements AfterViewInit {
     { time: '18', value: 70 }
   ];
 
-  // Define your team property properly
+
   team: TeamMember[] = [
     { name: 'John Doe', role: 'Engineer', avatar: 'assets/avatars/woman.png' },
     { name: 'Jane Smith', role: 'Designer', avatar: 'assets/avatars/man.png' },
