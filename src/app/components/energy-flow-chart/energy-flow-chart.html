@@ -1,0 +1,17 @@
+<div class="chart-container">
+  <div class="card shadow-sm">
+    <div class="card-header bg-white border-0 pt-4">
+      <h5 class="card-title mb-0">Energy Flow Overview</h5>
+      <p class="text-muted mb-0">24-hour energy generation, consumption and storage patterns</p>
+    </div>
+    <div class="card-body">
+      <div class="chart-wrapper">
+        <canvas baseChart
+          [data]="lineChartData"
+          [options]="lineChartOptions"
+          type="line">
+        </canvas>
+      </div>
+    </div>
+  </div>
+</div>

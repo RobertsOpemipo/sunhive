@@ -1,0 +1,46 @@
+<div class="large-double-chart2">
+  <!-- Chart + Header Row -->
+  <div class="chart-header">
+    <button class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2">
+      <mat-icon>calendar_today</mat-icon>
+      <span>This month</span>
+    </button>
+
+    <button class="btn btn-light btn-sm d-flex align-items-center gap-2">
+      <mat-icon>bar_chart</mat-icon>
+    </button>
+  </div>
+
+  <!-- Main Content: Digits + Chart Side by Side -->
+  <div class="main-content">
+    <!-- Left Side: Digits/Stats -->
+    <div class="stats-section ps-3">
+      <div class="frame-1116">
+        <div class="frame-1115">
+          <div class="price">$3,426.80</div>
+          <div class="frame-1114">
+            <div class="label">Total Earnings</div>
+            <div class="precentage">
+              <span class="positive-change">+2.45%</span>
+              <mat-icon class="positive-icon">arrow_drop_up</mat-icon>
+            </div>
+          </div>
+        </div>
+        <div class="track">
+          <mat-icon color="primary">done</mat-icon>
+          <span class="on-track">On track</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Side: Chart -->
+    <div class="chart-content">
+      <canvas
+        baseChart
+        [data]="lineChartData"
+        [options]="lineChartOptions"
+        [type]="'line'">  
+      </canvas>
+    </div>
+  </div>
+</div>

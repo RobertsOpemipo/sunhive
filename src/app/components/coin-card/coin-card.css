@@ -1,0 +1,35 @@
+.coin-card {
+    width: 100%;
+    min-height: 150px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 1rem;
+
+    .coin-name {
+        font-weight: 500;
+        color: #555;
+        font-size: 0.9rem;
+    }
+
+    .coin-value {
+        font-weight: 700;
+        font-size: 1.2rem;
+    }
+
+    .trend {
+        font-size: 0.85rem;
+
+        &.up {
+            color: #18AA4E;
+        }
+
+        &.down {
+            color: #C41C1C;
+        }
+    }
+
+    canvas {
+        width: 100% !important;
+        height: 60px !important;
+    }
+}

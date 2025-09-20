@@ -1,0 +1,262 @@
+<div class="container-fluid p-0">
+  <div class="schedule-maintenance-container">
+    <!-- Header Section with Progress -->
+    <div class="card mb-4">
+      <div class="card-body bg-light border rounded-3">
+        <div class="row justify-content-between align-items-center">
+          <div class="col-auto">
+            <div class="header-info">
+              <h5 class="card-title mb-1 text-dark fw-bold">Schedule Maintenance</h5>
+              <p class="card-text text-muted mb-0">Configure maintenance parameters and schedule</p>
+            </div>
+          </div>
+          <div class="col-auto">
+            <i class="fas fa-chevron-right text-muted"></i>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Progress Steps -->
+      <div class="progress-steps py-3">
+        <div class="d-flex justify-content-center position-relative">
+          <div class="step-item active me-5">
+            <div class="step-circle active">1</div>
+            <span class="step-label">Select Equipment</span>
+          </div>
+          <div class="step-item active me-5">
+            <div class="step-circle active">2</div>
+            <span class="step-label">Choose Service</span>
+          </div>
+          <div class="step-item me-5">
+            <div class="step-circle">3</div>
+            <span class="step-label">Set Schedule</span>
+          </div>
+          <div class="step-item">
+            <div class="step-circle">4</div>
+            <span class="step-label">Confirm</span>
+          </div>
+          <div class="progress-line"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Equipment Selection -->
+    <div class="mb-5">
+      <div class="section-header mb-4">
+        <i class="fas fa-cog me-2"></i>
+        <span class="fw-bold">Select Equipment to Maintain</span>
+      </div>
+      <div class="row g-3">
+        <div class="col-lg-3 col-md-6" *ngFor="let eq of equipment">
+          <div class="equipment-card" 
+               [class.selected]="eq.status === 'selected'"
+               (click)="selectEquipment(eq)">
+            <div class="card-icon mb-3">
+              <i class="fas" 
+                 [ngClass]="{
+                   'fa-pump': eq.name === 'Water Pump',
+                   'fa-bolt': eq.name === 'Generator',
+                   'fa-solar-panel': eq.name === 'Solar Array',
+                   'fa-snowflake': eq.name === 'Cooling System'
+                 }"></i>
+            </div>
+            <h6 class="equipment-name text-center fw-bold mb-2">{{eq.name}}</h6>
+            <p class="equipment-desc text-center small mb-0">{{eq.description}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Maintenance Type Selection -->
+    <div class="mb-5">
+      <div class="section-header mb-4">
+        <i class="fas fa-wrench me-2"></i>
+        <span class="fw-bold">Select Maintenance Type</span>
+      </div>
+      <div class="row g-3">
+        <div class="col-lg-3 col-md-6" *ngFor="let type of maintenanceTypes">
+          <div class="maintenance-type-card"
+               [class.selected]="selectedMaintenanceType === type.name"
+               (click)="selectMaintenanceType(type.name)">
+            <div class="card-icon mb-3">
+              <i [ngClass]="type.icon"></i>
+            </div>
+            <h6 class="text-center fw-normal mb-0">{{type.name}}</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Priority Level -->
+    <div class="mb-5">
+      <div class="section-header mb-4">
+        <span class="fw-bold">Priority Level</span>
+      </div>
+      <div class="row g-3">
+        <div class="col-lg-4 col-md-6" *ngFor="let priority of priorities">
+          <div class="priority-card" 
+               [class]="priority.color"
+               [class.selected]="priority.selected"
+               (click)="selectPriority(priority)">
+            <h6 class="priority-name text-center fw-normal mb-2">{{priority.name}}</h6>
+            <p class="priority-desc text-center small mb-0">{{priority.description}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Schedule Selection -->
+    <div class="mb-5">
+      <div class="section-header mb-4">
+        <i class="fas fa-calendar me-2"></i>
+        <span class="fw-bold">Select Date & Time</span>
+      </div>
+      <div class="row g-3">
+        <!-- Date Selection -->
+        <div class="col-lg-5 col-md-6">
+          <div class="schedule-card">
+            <h6 class="fw-bold mb-3">Select Date</h6>
+            <div class="input-group">
+              <input type="date" 
+                     class="form-control border-primary" 
+                     [(ngModel)]="selectedDate"
+                     placeholder="Select date">
+              <span class="input-group-text">
+                <i class="fas fa-calendar"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Time Slot Selection -->
+        <div class="col-lg-7 col-md-6">
+          <div class="schedule-card">
+            <h6 class="fw-bold mb-3">Available Time Slots</h6>
+            <div class="time-slots-grid">
+              <button *ngFor="let slot of timeSlots" 
+                      type="button"
+                      class="time-slot-btn"
+                      [class.selected]="selectedTimeSlot === slot"
+                      (click)="selectTimeSlot(slot)">
+                {{slot}}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Technician Selection -->
+    <div class="mb-5">
+      <div class="section-header mb-4">
+        <i class="fas fa-user-hard-hat me-2"></i>
+        <span class="fw-bold">Available Technician</span>
+      </div>
+      <div class="row g-3">
+        <div class="col-lg-4 col-md-6" *ngFor="let tech of technicians">
+          <div class="technician-card"
+               [class.selected]="tech.selected"
+               (click)="selectTechnician(tech)">
+            <div class="d-flex align-items-center mb-3">
+              <div class="tech-avatar me-3">
+                <img src="/api/placeholder/24/24" alt="{{tech.name}}" class="rounded-circle">
+              </div>
+              <div class="flex-grow-1">
+                <h6 class="tech-name mb-1">{{tech.name}}</h6>
+                <p class="tech-spec small text-muted mb-0">{{tech.specialization}}</p>
+              </div>
+              <div class="tech-rating">
+                <span class="badge bg-primary-light text-primary small">{{tech.rating}}</span>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+              <small class="text-muted">Experience: 5+ years</small>
+              <small class="text-muted">{{tech.availability}}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cost Estimation -->
+    <div class="mb-5">
+      <div class="section-header mb-4">
+        <i class="fas fa-dollar-sign me-2"></i>
+        <span class="fw-bold">Cost Estimation</span>
+      </div>
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="cost-card">
+            <div class="cost-item d-flex justify-content-between">
+              <span class="text-muted">Labour Cost</span>
+              <span class="fw-bold">${{costBreakdown.labour | number:'1.2-2'}}</span>
+            </div>
+            <div class="cost-item d-flex justify-content-between">
+              <span class="text-muted">Parts & Materials</span>
+              <span class="fw-bold">${{costBreakdown.parts | number:'1.2-2'}}</span>
+            </div>
+            <div class="cost-item d-flex justify-content-between">
+              <span class="text-muted">Equipment Usage</span>
+              <span class="fw-bold">${{costBreakdown.equipment | number:'1.2-2'}}</span>
+            </div>
+            <hr class="my-3">
+            <div class="cost-total d-flex justify-content-between">
+              <span class="text-muted fw-normal fs-6">Total Estimated Cost</span>
+              <span class="fw-bold fs-6">${{costBreakdown.total | number:'1.2-2'}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Additional Notes -->
+    <div class="mb-5">
+      <div class="section-header mb-4">
+        <span class="fw-bold">Additional Notes & Instructions</span>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="notes-card">
+            <textarea class="form-control border-0 resize-none" 
+                      rows="3" 
+                      placeholder="Enter any additional notes or instructions"
+                      [(ngModel)]="additionalNotes">
+            </textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success Notification -->
+    <div class="alert alert-primary-light d-flex align-items-center mb-4" role="alert">
+      <div class="alert-icon me-3">
+        <i class="fas fa-info-circle"></i>
+      </div>
+      <div class="flex-grow-1">
+        All required information has been provided. Ready to Schedule Maintenance
+      </div>
+    </div>
+
+    <!-- Footer Actions -->
+    <div class="footer-actions border-top pt-3">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center">
+          <i class="fas fa-info-circle text-muted me-2"></i>
+          <span class="text-muted small">Maintenance will be scheduled within 24 hours</span>
+        </div>
+        <div class="action-buttons">
+          <button type="button" 
+                  class="btn btn-outline-secondary me-3" 
+                  (click)="onCancel()">
+            Cancel
+          </button>
+          <button type="button" 
+                  class="btn btn-primary" 
+                  (click)="onSubmit()">
+            Schedule Maintenance
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

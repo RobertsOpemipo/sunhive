@@ -1,0 +1,14 @@
+.visitor-card {
+    background: #fff;
+    border: 1px solid #F8F9FA;
+    box-shadow: 0px 4px 20px rgba(238, 238, 238, 0.5);
+    border-radius: 20px;
+    height: 377px;
+    width: 100%;
+    position: relative;
+}
+
+.chart-wrapper {
+    height: calc(100% - 60px);
+    padding: 0 20px 20px 20px;
+}

@@ -1,1 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+
+
+.nav-link.active {
+    color: #9A3FEF !important;
+    font-weight: 600;
+    background: rgba(154, 63, 239, 0.06);
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

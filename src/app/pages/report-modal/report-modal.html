@@ -1,0 +1,173 @@
+<div class="modal-overlay" [class.active]="isVisible">
+  <div class="modal-container modal-xl">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title">Generate Reports</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="onCancel()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <div class="reports-container">
+          
+          <!-- Report Types Section -->
+          <div class="reports-section">
+            <div class="section-header">
+              <h6 class="section-title">Select Report Type</h6>
+              <p class="section-subtitle">Choose the type of report you want to generate</p>
+            </div>
+            
+            <div class="reports-grid">
+              <div class="report-card" 
+                   *ngFor="let report of reportTypes"
+                   [class.selected]="selectedReportType === report.id"
+                   (click)="selectReportType(report.id)">
+                <div class="report-icon">
+                  <i [class]="report.icon"></i>
+                </div>
+                <div class="report-content">
+                  <h6 class="report-title">{{report.name}}</h6>
+                  <p class="report-description">{{report.description}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Time Period Section -->
+          <div class="reports-section">
+            <div class="section-header">
+              <h6 class="section-title">Select Time Period</h6>
+              <p class="section-subtitle">Choose the date range for your report</p>
+            </div>
+            
+            <div class="time-period-container">
+              <!-- Time Period Options -->
+              <div class="time-period-column">
+                <div class="time-period-card">
+                  <h6 class="card-title">Time Period</h6>
+                  
+                  <div class="time-options-grid">
+                    <button type="button" 
+                            class="time-option-btn"
+                            [class.selected]="selectedTimePeriod === period.value"
+                            *ngFor="let period of timePeriods"
+                            (click)="selectTimePeriod(period.value)">
+                      {{period.label}}
+                    </button>
+                  </div>
+                  
+                  <!-- Custom Date Range -->
+                  <div class="date-range-section">
+                    <div class="date-range-row">
+                      <div class="date-selector">
+                        <label class="date-label">From Date</label>
+                        <div class="date-input-group">
+                          <input type="date" 
+                                 class="form-control" 
+                                 [(ngModel)]="fromDate"
+                                 placeholder="Select date">
+                          <span class="input-icon">
+                            <i class="fas fa-calendar"></i>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="date-selector">
+                        <label class="date-label">To Date</label>
+                        <div class="date-input-group">
+                          <input type="date" 
+                                 class="form-control" 
+                                 [(ngModel)]="toDate"
+                                 placeholder="Select date">
+                          <span class="input-icon">
+                            <i class="fas fa-calendar"></i>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Data Filters -->
+              <div class="filter-column">
+                <div class="data-filter-card">
+                  <h6 class="card-title">Data Filters</h6>
+                  
+                  <div class="filter-options">
+                    <div class="filter-item" 
+                         *ngFor="let filter of dataFilters"
+                         (click)="toggleFilter(filter.id)">
+                      <div class="filter-checkbox">
+                        <i class="fas fa-check" 
+                           [class.visible]="isFilterSelected(filter.id)"></i>
+                      </div>
+                      <span class="filter-label">{{filter.label}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Export Format Section -->
+          <div class="reports-section">
+            <div class="section-header">
+              <h6 class="section-title">Export Format</h6>
+            </div>
+            
+            <div class="export-formats-grid">
+              <div class="export-format-card" 
+                   *ngFor="let format of exportFormats"
+                   [class.selected]="selectedExportFormat === format.id"
+                   (click)="selectExportFormat(format.id)">
+                <div class="format-icon">
+                  <i [class]="format.icon"></i>
+                </div>
+                <div class="format-content">
+                  <h6 class="format-title">{{format.name}}</h6>
+                  <p class="format-description">{{format.description}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Delivery Method Section -->
+          <div class="reports-section">
+            <div class="section-header">
+              <h6 class="section-title">Delivery Method</h6>
+            </div>
+            
+            <div class="delivery-methods">
+              <div class="delivery-option" 
+                   *ngFor="let method of deliveryMethods"
+                   [class.selected]="selectedDeliveryMethod === method.id"
+                   (click)="selectDeliveryMethod(method.id)">
+                <div class="delivery-icon">
+                  <i [class]="method.icon"></i>
+                </div>
+                <div class="delivery-content">
+                  <h6 class="delivery-title">{{method.name}}</h6>
+                  <p class="delivery-description">{{method.description}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="onCancel()">
+          Cancel
+        </button>
+        <button type="button" class="btn btn-primary" (click)="onGenerateReport()">
+          Generate Report
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

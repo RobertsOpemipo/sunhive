@@ -1,0 +1,38 @@
+.notification-bar {
+    background: #fff;
+    border: 1px solid #eee;
+}
+
+.icon-container {
+    background: #EBD9FC;
+    color: #9A3FEF;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-container i {
+    font-size: 14px;
+}
+
+.coin-card {
+    border: 0.7px solid #DFE5F9;
+    border-radius: 12px;
+}
+
+.circle {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.bg-purple {
+    background: #EBD9FC;
+}
+
+.text-purple {
+    color: #9A3FEF;
+}
