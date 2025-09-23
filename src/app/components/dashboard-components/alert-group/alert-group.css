@@ -1,0 +1,239 @@
+.alert-card {
+  background: white;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+  margin-bottom: 24px;
+}
+
+.card-header h6 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2E2E2F;
+}
+
+.main-content {
+  display: flex;
+  gap: 24px;
+}
+
+.chart-section {
+  flex: 1;
+  padding-right: 24px;
+  border-right: 1px solid #F0F0F0;
+  min-width: 0; /* Allow chart to shrink */
+}
+
+.alert-table {
+  flex: 1;
+  min-width: 0; /* Allow table to shrink */
+}
+
+.filter-btn {
+  font-size: 14px;
+  color: #666;
+  padding: 6px 12px;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+}
+
+.filter-btn:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.filter-btn .mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.btn-icon {
+  padding: 6px;
+  color: #666;
+  background: transparent;
+  border: none;
+}
+
+.btn-icon:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+/* Alert Table Styles */
+.alert-table {
+  margin-bottom: 24px;
+}
+
+.table-header {
+  padding: 12px 16px;
+  background: #F9FAFB;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+}
+
+.alert-row {
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #F0F0F0;
+}
+
+.col-name {
+  flex: 2;
+  font-weight: 500;
+}
+
+.col-status {
+  flex: 1.5;
+}
+
+.col-date {
+  flex: 1.5;
+  color: #666;
+}
+
+.col-progress {
+  flex: 2;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 13px;
+  gap: 4px;
+}
+
+.status-badge .status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.status-normal {
+  background: rgba(76, 175, 80, 0.1);
+  color: #4CAF50;
+}
+
+.status-normal .status-dot {
+  background: #4CAF50;
+}
+
+.status-warning {
+  background: rgba(255, 152, 0, 0.1);
+  color: #FF9800;
+}
+
+.status-warning .status-dot {
+  background: #FF9800;
+}
+
+.status-critical {
+  background: rgba(244, 67, 54, 0.1);
+  color: #F44336;
+}
+
+.status-critical .status-dot {
+  background: #F44336;
+}
+
+.progress {
+  height: 6px;
+  background: #F0F0F0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-normal {
+  background: #4CAF50;
+}
+
+.progress-warning {
+  background: #FF9800;
+}
+
+.progress-critical {
+  background: #F44336;
+}
+
+/* Profit Section Styles */
+.profit-section {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #F0F0F0;
+}
+
+.profit-amount {
+  font-size: 24px;
+  font-weight: 600;
+  color: #2E2E2F;
+}
+
+.profit-label {
+  font-size: 14px;
+  color: #666;
+  display: flex;
+  align-items: center;
+}
+
+.profit-percentage {
+  color: #4CAF50;
+  font-weight: 500;
+}
+
+.price-badge {
+  padding: 6px 12px;
+  background: rgba(76, 175, 80, 0.1);
+  color: #4CAF50;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.chart-container {
+  height: 200px;
+  margin-top: 8px;
+}
+
+.time-btn {
+  padding: 8px 24px;
+  font-size: 14px;
+  color: #666;
+  background: transparent;
+  border: none;
+  border-radius: 20px;
+  transition: all 0.2s;
+}
+
+.time-btn:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.time-btn.active {
+  background: #4CAF50;
+  color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .alert-card {
+    padding: 16px;
+  }
+
+  .alert-row {
+    padding: 8px 12px;
+  }
+
+  .time-btn {
+    padding: 6px 16px;
+  }
+}

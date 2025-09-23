@@ -1,0 +1,18 @@
+<div class="coin-card">
+  <div class="card-header">
+    <div class="title">{{ coinName }}</div>
+    <div class="value">{{ coinValue }}</div>
+  </div>
+
+  <div class="trend-container">
+    <div class="trend" [ngClass]="trendDirection">
+      <i *ngIf="trendDirection === 'up'" class="fas fa-arrow-up"></i>
+      <i *ngIf="trendDirection === 'down'" class="fas fa-arrow-down"></i>
+      <span>{{ trend }}</span>
+    </div>
+  </div>
+
+  <div class="chart-container">
+    <canvas #chartCanvas></canvas>
+  </div>
+</div>

@@ -1,141 +1,129 @@
-  <nav class="bg-white border-end p-3 d-flex flex-column sidebar" style="width: 220px;">
+  <nav class="bg-white border-end p-3 d-flex flex-column sidebar">
     <!-- Logo -->
-    <div class="d-flex align-items-center mb-3 gap-2">
-      <div style="width:36px;height:36px;background:#9A3FEF;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;">
-        S
-      </div>
-      <div class="d-none d-lg-block ">
-        <div style="font-weight:600;">SolarGrid</div>
-      </div>
+    <div class="d-flex align-items-center mb-3 justify-content-center">
+      <div class="logo-box">S</div>
     </div>
 
     <hr />
 
     <!-- Sections -->
     <div class="mb-4">
-      <div class="small text-secondary fw-semibold mb-2 d-none d-lg-block">OVERVIEW</div>
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a class="nav-link d-flex align-items-center gap-2 active"
+          <a class="nav-link d-flex align-items-center justify-content-center"
             routerLink="/dashboard"
+            routerLinkActive="active"
             data-bs-toggle="tooltip"
             data-bs-placement="right"
             title="Dashboard">
             <i class="fas fa-tachometer-alt"></i>
-            <span class="d-none d-lg-inline">Dashboard</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link d-flex align-items-center gap-2"
+          <a class="nav-link d-flex align-items-center justify-content-center"
             routerLink="/villages"
+            routerLinkActive="active"
             data-bs-toggle="tooltip"
             data-bs-placement="right"
             title="Villages">
             <i class="fas fa-city"></i>
-            <span class="d-none d-lg-inline">Villages</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link d-flex align-items-center gap-2"
+          <a class="nav-link d-flex align-items-center justify-content-center"
             routerLink="/users"
+            routerLinkActive="active"
             data-bs-toggle="tooltip"
             data-bs-placement="right"
             title="Users">
             <i class="fas fa-users"></i>
-            <span class="d-none d-lg-inline">Users</span>
           </a>
         </li>
       </ul>
     </div>
 
     <div class="mb-4">
-      <div class="small text-secondary fw-semibold mb-2 d-none d-lg-block">UTILITIES</div>
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a class="nav-link d-flex align-items-center gap-2"
+          <a class="nav-link d-flex align-items-center justify-content-center"
             routerLink="/water"
+            routerLinkActive="active"
             data-bs-toggle="tooltip"
             data-bs-placement="right"
             title="Water System">
             <i class="fas fa-tint"></i>
-            <span class="d-none d-lg-inline">Water System</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link d-flex align-items-center gap-2"
+          <a class="nav-link d-flex align-items-center justify-content-center"
             routerLink="/energy"
+            routerLinkActive="active"
             data-bs-toggle="tooltip"
             data-bs-placement="right"
             title="Energy Grid">
             <i class="fas fa-bolt"></i>
-            <span class="d-none d-lg-inline">Energy Grid</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link d-flex align-items-center gap-2"
+          <a class="nav-link d-flex align-items-center justify-content-center"
             routerLink="/appliances"
+            routerLinkActive="active"
             data-bs-toggle="tooltip"
             data-bs-placement="right"
             title="Appliances">
             <i class="fas fa-tv"></i>
-            <span class="d-none d-lg-inline">Appliances</span>
           </a>
         </li>
       </ul>
     </div>
 
     <div class="mb-4">
-      <div class="small text-secondary fw-semibold mb-2 d-none d-lg-block">INSIGHTS</div>
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a class="nav-link d-flex align-items-center gap-2"
+          <a class="nav-link d-flex align-items-center justify-content-center"
             routerLink="/analytics"
+            routerLinkActive="active"
             data-bs-toggle="tooltip"
             data-bs-placement="right"
             title="Analytics">
             <i class="fas fa-chart-line"></i>
-            <span class="d-none d-lg-inline">Analytics</span>
           </a>
         </li>
       </ul>
     </div>
 
     <div class="mb-4">
-      <div class="small text-secondary fw-semibold mb-2 d-none d-lg-block">SYSTEM</div>
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a class="nav-link d-flex align-items-center gap-2"
+          <a class="nav-link d-flex align-items-center justify-content-center"
             routerLink="/notifications"
+            routerLinkActive="active"
             data-bs-toggle="tooltip"
             data-bs-placement="right"
-            title="Notification">
+            title="Notifications">
             <i class="fas fa-bell"></i>
-            <span class="d-none d-lg-inline">Notification</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link d-flex align-items-center gap-2"
+          <a class="nav-link d-flex align-items-center justify-content-center"
             routerLink="/maintenance"
+            routerLinkActive="active"
             data-bs-toggle="tooltip"
             data-bs-placement="right"
             title="Maintenance">
             <i class="fas fa-tools"></i>
-            <span class="d-none d-lg-inline">Maintenance</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link d-flex align-items-center justify-content-center"
+            routerLink="/settings"
+            routerLinkActive="active"
+            data-bs-toggle="tooltip"
+            data-bs-placement="right"
+            title="Settings">
+            <i class="fas fa-cog"></i>
           </a>
         </li>
       </ul>
-    </div>
-
-    <hr />
-
-    <!-- Footer profile -->
-    <div class="mt-auto d-flex align-items-center gap-3 pt-3">
-      <div style="width:40px;height:40px;background:#9A3FEF;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;">
-        JD
-      </div>
-      <div class="d-none d-lg-block">
-        <div class="fw-medium">Jamie Doe</div>
-        <div class="text-muted small">System Manager</div>
-      </div>
     </div>
   </nav>

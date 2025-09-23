@@ -1,0 +1,116 @@
+.chart-card {
+    background: #FFFFFF;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1);
+    border: 1px solid #E5E7EB;
+    width: 100%;
+    position: relative;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chart-header .btn {
+    font-size: 14px;
+    color: #4B5563;
+    background: #F3F4F6;
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    padding: 8px 12px;
+}
+
+.small-icon {
+    font-size: 18px !important;
+    width: 18px !important;
+    height: 18px !important;
+    color: #6B7280;
+}
+
+.graph-icon {
+    color: #9333EA;
+}
+
+.chart-indicator {
+    background: #F3F3FF;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.stats-section {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 16px;
+}
+
+.price-value {
+    font-size: 32px;
+    font-weight: 600;
+    color: #111827;
+    margin: 0;
+    line-height: 1.2;
+    margin-bottom: 8px;
+}
+
+.stats-details {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.stats-label {
+    font-size: 14px;
+    color: #4B5563;
+}
+
+.change-indicator {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.change-indicator.positive {
+    color: #059669;
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: #059669;
+}
+
+.status-icon {
+    font-size: 16px !important;
+    width: 16px !important;
+    height: 16px !important;
+    color: #059669;
+}
+
+.chart-container {
+    height: 200px;
+    position: relative;
+    margin-top: 20px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .chart-card {
+        padding: 16px;
+    }
+
+    .price-value {
+        font-size: 28px;
+    }
+
+    .chart-container {
+        height: 180px;
+    }
+}

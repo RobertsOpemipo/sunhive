@@ -4,16 +4,17 @@ import { Chart, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElem
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from "@angular/material/icon";
 import { Router } from '@angular/router';
-import { Maintenance } from '../../pages/maintenance/maintenance';
-import { ReportModal } from '../../pages/report-modal/report-modal';
-import { ManageUsersComponent } from '../../pages/manage-users/manage-users';
+import { Maintenance } from '../maintenance/maintenance';
+import { ReportModal } from '../report-modal/report-modal';
+import { ManageUsersComponent } from '../manage-users/manage-users';
 
 Chart.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement);
 
-interface TeamMember {
+interface User {
   name: string;
   role: string;
   avatar: string;
+  timestamp?: string;
 }
 
 @Component({
@@ -45,10 +46,10 @@ export class GraphGroup implements AfterViewInit {
   ];
 
 
-  team: TeamMember[] = [
-    { name: 'John Doe', role: 'Engineer', avatar: 'assets/avatars/woman.png' },
-    { name: 'Jane Smith', role: 'Designer', avatar: 'assets/avatars/man.png' },
-    { name: 'Mike Lee', role: 'Manager', avatar: 'assets/avatars/man2.png' }
+  recentUsers: User[] = [
+    { name: 'Grace Wanjiku', role: 'Admin User', avatar: 'assets/avatars/woman.png' },
+    { name: 'Joseph Kamau', role: 'Normal User', avatar: 'assets/avatars/man.png' },
+    { name: 'Esther Maina', role: 'Normal User', avatar: 'assets/avatars/woman.png' }
   ];
 
   constructor(private dialog: MatDialog, private router: Router) { }
@@ -70,8 +71,8 @@ export class GraphGroup implements AfterViewInit {
             labels: ['System Efficiency', 'Uptime', 'Load Factor'],
             datasets: [
               {
-                data: [this.systemEfficiency, this.uptime, this.loadFactor],
-                backgroundColor: ['#FAB615', '#18AA4E', '#2B6CEE'],
+                data: [94.2, 99.8, 67],
+                backgroundColor: ['#F97316', '#22C55E', '#2B6CEE'],
                 borderWidth: 0,
                 borderRadius: 4,
                 spacing: 2
@@ -81,16 +82,24 @@ export class GraphGroup implements AfterViewInit {
           options: {
             responsive: true,
             maintainAspectRatio: false,
-            cutout: '75%',
+            cutout: '70%',
             plugins: {
               legend: { display: false },
               tooltip: {
                 enabled: true,
-                backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                callbacks: { label: (context) => context.parsed + '%' }
+                backgroundColor: '#FFFFFF',
+                titleColor: '#111827',
+                bodyColor: '#6B7280',
+                bodyFont: { size: 12 },
+                titleFont: { size: 13, weight: 'bold' },
+                padding: 12,
+                borderColor: '#E5E7EB',
+                borderWidth: 1,
+                callbacks: {
+                  label: (context) => `${context.label}: ${context.parsed}%`
+                }
               }
-            },
-            animation: { animateRotate: true, duration: 1000 }
+            }
           }
         });
       }
@@ -100,26 +109,55 @@ export class GraphGroup implements AfterViewInit {
     if (this.barCanvas?.nativeElement) {
       const barCtx = this.barCanvas.nativeElement.getContext('2d');
       if (barCtx) {
+        const gradient = barCtx.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, '#9333EA');
+        gradient.addColorStop(1, '#9333EA22');
+
         this.barChart = new Chart(barCtx, {
           type: 'bar',
           data: {
-            labels: this.traffic.map(t => t.time + ':00'),
+            labels: ['00', '04', '08', '12', '14', '16', '18'],
             datasets: [{
-              label: 'Traffic (kWh)',
               data: this.traffic.map(t => t.value),
-              backgroundColor: '#2B6CEE',
-              borderRadius: 8,
-              barThickness: 'flex',
-              maxBarThickness: 30
+              backgroundColor: gradient,
+              borderRadius: 100,
+              borderSkipped: false,
+              barThickness: 8
             }]
           },
           options: {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
+            plugins: {
+              legend: { display: false }
+            },
             scales: {
-              x: { grid: { display: false }, ticks: { color: '#6c757d' } },
-              y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.1)' }, ticks: { color: '#6c757d' } }
+              x: {
+                display: true,
+                grid: {
+                  display: false
+                },
+                ticks: {
+                  color: '#6B7280',
+                  font: {
+                    size: 11,
+                    family: "'Inter', sans-serif"
+                  }
+                },
+                border: {
+                  display: false
+                }
+              },
+              y: {
+                display: false,
+                beginAtZero: true
+              }
+            },
+            layout: {
+              padding: {
+                top: 20,
+                bottom: 10
+              }
             }
           }
         });

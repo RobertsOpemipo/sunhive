@@ -1,0 +1,122 @@
+<div class="container-fluid">
+  <div class="row">
+    <!-- Performance Metrics -->
+    <div class="col-lg-3 col-md-6 mb-4">
+      <div class="card h-100">
+        <div class="card-header bg-white border-0">
+          <div class="d-flex justify-content-between align-items-center">
+            <h6 class="mb-0">Performance Metrics</h6>
+            <div class="dropdown">
+              <button class="btn filter-btn" type="button">
+                Monthly
+                <mat-icon class="ms-1">expand_more</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="donut-chart-wrapper">
+            <canvas #donutCanvas></canvas>
+          </div>
+          <div class="metrics-details mt-4">
+            <div class="d-flex justify-content-between">
+              <div class="metric-item">
+                <div class="metric-dot orange"></div>
+                <div class="metric-label">System efficiency</div>
+                <div class="metric-value">94.2%</div>
+              </div>
+              <div class="metric-item">
+                <div class="metric-dot green"></div>
+                <div class="metric-label">Uptime</div>
+                <div class="metric-value">99.8%</div>
+              </div>
+              <div class="metric-item">
+                <div class="metric-dot blue"></div>
+                <div class="metric-label">Load Factor</div>
+                <div class="metric-value">67%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Financial Overview -->
+    <div class="col-lg-3 col-md-6 mb-4">
+      <div class="card h-100">
+        <div class="card-header bg-white border-0">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="d-flex align-items-center mb-2">
+                <h3 class="mb-0 me-2">$37.5K</h3>
+                <span class="badge bg-success-soft">+2.45%</span>
+              </div>
+              <div class="d-flex align-items-center">
+                <span class="text-muted small me-2">Monthly Revenue</span>
+                <span class="filter-text">Monthly <mat-icon class="small-icon">expand_more</mat-icon></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="revenue-chart">
+            <canvas #barCanvas></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recently Added Users -->
+    <div class="col-lg-3 col-md-6 mb-4">
+      <div class="card h-100">
+        <div class="card-header bg-white border-0">
+          <div class="d-flex justify-content-between align-items-center">
+            <h6 class="mb-0">Recently Added Users</h6>
+            <button class="btn btn-primary btn-icon">
+              <mat-icon class="centered-icon">add</mat-icon>
+            </button>
+          </div>
+        </div>
+        <div class="card-body px-0">
+          <div class="user-list">
+            <div class="user-item d-flex align-items-center px-3 py-2" *ngFor="let user of recentUsers">
+              <img [src]="user.avatar" [alt]="user.name" class="user-avatar">
+              <div class="ms-3">
+                <h6 class="mb-0">{{user.name}}</h6>
+                <small class="text-muted">{{user.role}}</small>
+              </div>
+              <button class="btn btn-link ms-auto">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Action -->
+    <div class="col-lg-3 col-md-6 mb-4">
+      <div class="card h-100">
+        <div class="card-header bg-white border-0">
+          <h6 class="mb-0">Quick Action</h6>
+        </div>
+        <div class="card-body">
+          <div class="quick-actions-container d-flex flex-column justify-content-around h-100 py-3">
+            <button class="btn btn-primary action-button" (click)="openMaintenanceModal()">
+              <mat-icon class="me-2">schedule</mat-icon>
+              Schedule Maintenance
+            </button>
+            <button class="btn btn-outline-secondary action-button" (click)="navigateToManageUsers()">
+              <mat-icon class="me-2">group</mat-icon>
+              Manage Users
+            </button>
+            <button class="btn btn-outline-secondary action-button" (click)="openReportModal()">
+              <mat-icon class="me-2">assessment</mat-icon>
+              Generate Report
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

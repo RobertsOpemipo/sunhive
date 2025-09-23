@@ -1,3 +1,28 @@
+.dashboard-container {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    background: #f8f9fa;
+}
+
+.content-area {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 24px;
+}
+
+.sidebar {
+    flex-shrink: 0;
+}
+
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin-left: 80px;
+}
+
 .notification-bar {
     background: #fff;
     border: 1px solid #eee;

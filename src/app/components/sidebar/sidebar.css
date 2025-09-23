@@ -1,19 +1,21 @@
     .sidebar {
-        width: 350px;
-        height: auto;
-    }
-    
-    .sidebar .logo-box {
-        width: 36px;
-        height: 36px;
-        background: #9A3FEF;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #fff;
-        font-weight: 600;
-    }
+    width: 80px;
+    height: 100vh;
+    position: relative;
+}
+
+.sidebar .logo-box {
+    width: 36px;
+    height: 36px;
+    background: #9A3FEF;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 600;
+    flex-shrink: 0;
+}
 
     .sidebar .profile-avatar {
         width: 40px;
@@ -28,32 +30,44 @@
     }
 
     .sidebar .nav-link {
-        color: #555;
-        transition: all 0.2s ease-in-out;
-        border-radius: 6px;
-        padding: 6px 10px;
-    }
+    color: #555;
+    transition: all 0.2s ease-in-out;
+    border-radius: 6px;
+    padding: 10px;
+    margin: 4px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-    .sidebar .nav-link:hover {
-        background: #f3e9ff;
-        color: #9A3FEF;
-        transform: translateX(4px);
-    }
+.sidebar .nav-link:hover {
+    background: #f3e9ff;
+    color: #9A3FEF;
+    transform: scale(1.1);
+}
 
-    .sidebar .nav-link.active {
-        background: #f3e9ff;
-        color: #9A3FEF;
-        font-weight: 600;
-    }
+.sidebar .nav-link.active {
+    background: #f3e9ff;
+    color: #9A3FEF;
+    font-weight: 600;
+}
 
-        
-        .sidebar i {
-            color: #9A3FEF;
-            font-size: 16px;
-            
-        }
-    
-        .sidebar .nav-link.active i {
-            color: #9A3FEF;
+.sidebar i {
+    color: #9A3FEF;
+    font-size: 16px;
+    width: 20px;
+    text-align: center;
+}
 
-        }
+.sidebar .nav-link.active i {
+    color: #9A3FEF;
+}
+
+.sidebar .section-title {
+    font-size: 12px;
+    color: #666;
+    font-weight: 600;
+    margin-bottom: 8px;
+    transition: opacity 0.3s ease;
+}
+

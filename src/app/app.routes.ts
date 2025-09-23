@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Dashboard } from './pages/dashboard/dashboard';
-import { Maintenance } from './pages/maintenance/maintenance'; 
-import { ReportModal } from './pages/report-modal/report-modal';
-import { ManageUsersComponent } from './pages/manage-users/manage-users';
+import { Maintenance } from './components/dashboard-components/maintenance/maintenance'; 
+import { ReportModal } from './components/dashboard-components/report-modal/report-modal';
+import { ManageUsersComponent } from './components/dashboard-components/manage-users/manage-users';
+import { Villages } from './pages/villages/villages';
 
 
 export const routes: Routes = [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     { path: 'dashboard', component: Dashboard },
+    { path: 'villages', component: Villages },
     { path: 'maintenance', component: Maintenance },
     { path: 'report', component: ReportModal },
     { path: 'manage-users', component: ManageUsersComponent }

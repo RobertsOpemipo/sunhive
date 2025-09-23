@@ -1,0 +1,75 @@
+<div class="alert-card">
+  <!-- Header -->
+  <div class="card-header">
+    <div class="d-flex justify-content-between align-items-center">
+      <h6 class="mb-0">Recent Alerts</h6>
+      <div class="filter-section d-flex align-items-center">
+        <button class="btn filter-btn">
+          Monthly
+          <mat-icon>keyboard_arrow_down</mat-icon>
+        </button>
+        <button class="btn btn-icon ms-2">
+          <mat-icon>more_horiz</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <!-- Chart Section -->
+    <div class="chart-section">
+      <div class="d-flex justify-content-between align-items-baseline mb-2">
+        <div>
+          <h2 class="profit-amount mb-0">$9250</h2>
+          <div class="profit-label">
+            <span class="me-2">Net Profit</span>
+            <span class="profit-percentage">+4.45%</span>
+          </div>
+        </div>
+        <div class="price-badge">$100.00</div>
+      </div>
+
+      <div class="d-flex justify-content-around justify-content-md-between mb-4">
+        <button class="btn time-btn" [class.active]="selectedTimeRange === 'week'" (click)="setTimeRange('week')">Week</button>
+        <button class="btn time-btn" [class.active]="selectedTimeRange === 'month'" (click)="setTimeRange('month')">Month</button>
+        <button class="btn time-btn" [class.active]="selectedTimeRange === 'year'" (click)="setTimeRange('year')">Year</button>
+      </div>
+
+      <div class="chart-container">
+        <canvas #profitChart></canvas>
+      </div>
+    </div>
+
+    <!-- Alert Table -->
+    <div class="alert-table">
+      <div class="table-header d-flex">
+        <div class="col-name">NAME</div>
+        <div class="col-status">STATUS</div>
+        <div class="col-date">DATE</div>
+        <div class="col-progress">PROGRESS</div>
+      </div>
+
+      <div class="table-body">
+        <!-- Alert Row -->
+        <div class="alert-row" *ngFor="let alert of alerts">
+          <div class="col-name">{{alert.name}}</div>
+          <div class="col-status">
+            <span class="status-badge" [ngClass]="getStatusClass(alert.status)">
+              <span class="status-dot"></span>
+              {{alert.status}}
+            </span>
+          </div>
+          <div class="col-date">{{alert.date}}</div>
+          <div class="col-progress">
+            <div class="progress">
+              <div class="progress-bar" 
+                   [ngClass]="getProgressClass(alert.status)"
+                   [style.width]="alert.progress + '%'">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

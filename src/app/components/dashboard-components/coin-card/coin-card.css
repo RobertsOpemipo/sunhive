@@ -1,0 +1,110 @@
+.coin-card {
+    width: 100%;
+    min-height: 120px;
+    height: 100%;
+    background: #FFFFFF;
+    border: 0.7px solid #DFE5F9;
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.card-header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 8px;
+}
+
+.title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #696C70;
+}
+
+.value {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #1D1E20;
+}
+
+.trend-container {
+    margin-bottom: 12px;
+}
+
+.trend {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    font-weight: 400;
+
+    i {
+        font-size: 10px;
+    }
+
+    &.up {
+        color: #22C55E;
+    }
+
+    &.down {
+        color: #EF4444;
+    }
+}
+
+.chart-container {
+    flex-grow: 1;
+    position: relative;
+    min-height: 40px;
+    height: 40px;
+    margin-top: auto;
+}
+
+canvas {
+    width: 100% !important;
+    height: 100% !important;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+@media screen and (max-width: 768px) {
+    .coin-card {
+        min-height: 110px;
+        padding: 12px;
+    }
+
+    .title {
+        font-size: 13px;
+    }
+
+    .value {
+        font-size: 18px;
+    }
+
+    .trend {
+        font-size: 11px;
+    }
+
+    .chart-container {
+        min-height: 35px;
+        height: 35px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .coin-card {
+        min-height: 100px;
+        padding: 10px;
+    }
+
+    .chart-container {
+        min-height: 30px;
+        height: 30px;
+    }
+}

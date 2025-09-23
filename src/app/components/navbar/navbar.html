@@ -3,11 +3,11 @@
   <div class="left-section">
     <!-- Icon inside circle -->
     <div class="logo-circle">
-      <i class="fas fa-solar-panel"></i>
+      <i class="fas" [class]="currentNav.icon"></i>
     </div>
     <div class="title-texts">
-      <div class="title">Dashboard</div>
-      <div class="subtitle">Monitor and manage connected village systems</div>
+      <div class="title">{{ currentNav.title }}</div>
+      <div class="subtitle">{{ currentNav.subtitle }}</div>
     </div>
   </div>
 

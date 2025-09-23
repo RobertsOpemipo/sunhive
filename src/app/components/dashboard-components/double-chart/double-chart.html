@@ -1,0 +1,38 @@
+<div class="chart-card">
+  <!-- Header -->
+  <div class="chart-header mb-4">
+    <button class="btn btn-light btn-sm d-flex align-items-center gap-2">
+      <mat-icon class="small-icon">calendar_today</mat-icon>
+      <span>This month</span>
+    </button>
+
+    <div class="chart-indicator">
+      <mat-icon class="small-icon graph-icon">bar_chart</mat-icon>
+    </div>
+  </div>
+
+  <!-- Stats Section -->
+  <div class="stats-section">
+    <h2 class="price-value">$37.5K</h2>
+    <div class="stats-details">
+      <span class="stats-label">Operating Cost</span>
+      <div class="change-indicator positive">
+        <span>+2.45%</span>
+      </div>
+    </div>
+    <div class="status-indicator">
+      <mat-icon class="status-icon">check_circle</mat-icon>
+      <span>On track</span>
+    </div>
+  </div>
+
+  <!-- Chart Section -->
+  <div class="chart-container">
+    <canvas
+      baseChart
+      [data]="lineChartData"
+      [options]="lineChartOptions"
+      [type]="'line'">
+    </canvas>
+  </div>
+</div>
