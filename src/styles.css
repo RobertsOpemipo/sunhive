@@ -5,5 +5,12 @@
     font-weight: 600;
     background: rgba(154, 63, 239, 0.06);
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body { 
+    height: 100vh; /* Fixed viewport height */
+    min-height: 100vh; /* Ensures minimum height is also fixed */
+    overflow-y: auto; /* Adds scrolling if content exceeds height */
+}
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+}

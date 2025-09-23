@@ -5,13 +5,13 @@ import { Maintenance } from './components/dashboard-components/maintenance/maint
 import { ReportModal } from './components/dashboard-components/report-modal/report-modal';
 import { ManageUsersComponent } from './components/dashboard-components/manage-users/manage-users';
 import { Villages } from './pages/villages/villages';
-
+import { MaintenancePage } from './pages/maintenance/maintenance';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     { path: 'dashboard', component: Dashboard },
     { path: 'villages', component: Villages },
-    { path: 'maintenance', component: Maintenance },
+    { path: 'maintenance-schedule', component: MaintenancePage },
     { path: 'report', component: ReportModal },
     { path: 'manage-users', component: ManageUsersComponent }
 ];
@@ -20,4 +20,4 @@ export const routes: Routes = [
     imports: [RouterModule.forRoot(routes, { useHash: false })], 
     exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Navbar } from '../../components/navbar/navbar';
-import { Sidebar } from '../../components/sidebar/sidebar';
 import { VillageHeaderComponent } from '../../components/village-components/village-header/village-header';
 import { VillageCardComponent, VillageData } from '../../components/village-components/village-card/village-card';
 import { StatsCardComponent } from '../../components/dashboard-components/stats-card/stats-card';
@@ -40,62 +38,109 @@ export class Villages {
       data: [12, 14, 15, 16, 15, 17, 16, 18]
     }
   ];
+
   villages: VillageData[] = [
     {
-      name: 'Senten Village',
-      status: 'Active',
+      name: 'Kamau Village',
       totalPopulation: 950,
       energyUsage: '156 kWh',
-      revenue: '$127.5K',
+      revenue: '$137.5K',
       resourceUtilization: {
-        waterUsage: 65,
-        electricity: 75,
+        waterUsage: 64,
+        electricity: 78,
         internet: 70,
-        appliances: 45
+        appliances: 92
       },
-      lastUpdated: '1 hour ago'
+      lastUpdated: '2 hours ago',
+      status: 'Active'
     },
     {
-      name: 'Muela Village',
-      status: 'Active',
-      totalPopulation: 458,
-      energyUsage: '55 kWh',
-      revenue: '$47.8K',
+      name: 'Mwangi Estate',
+      totalPopulation: 1250,
+      energyUsage: '210 kWh',
+      revenue: '$182.3K',
       resourceUtilization: {
-        waterUsage: 45,
-        electricity: 35,
-        internet: 55,
-        appliances: 25
+        waterUsage: 58,
+        electricity: 82,
+        internet: 65,
+        appliances: 88
       },
-      lastUpdated: '2 hours ago'
+      lastUpdated: '1 hour ago',
+      status: 'Active'
     },
     {
-      name: 'Mantiri Village',
-      status: 'Maintenance',
-      totalPopulation: 728,
-      energyUsage: '92 kWh',
-      revenue: '$98.13K',
+      name: 'Ochieng Community',
+      totalPopulation: 780,
+      energyUsage: '132 kWh',
+      revenue: '$98.6K',
+      resourceUtilization: {
+        waterUsage: 72,
+        electricity: 65,
+        internet: 80,
+        appliances: 75
+      },
+      lastUpdated: '3 hours ago',
+      status: 'Maintenance'
+    },
+    {
+      name: 'Wanjiku Heights',
+      totalPopulation: 1100,
+      energyUsage: '185 kWh',
+      revenue: '$156.2K',
       resourceUtilization: {
         waterUsage: 60,
-        electricity: 85,
-        internet: 65,
-        appliances: 30
+        electricity: 75,
+        internet: 68,
+        appliances: 85
       },
-      lastUpdated: '30 minutes ago'
-    },
-    {
-      name: 'Antara Village',
-      status: 'Active',
-      totalPopulation: 1000,
-      energyUsage: '150 kWh',
-      revenue: '$130.75K',
-      resourceUtilization: {
-        waterUsage: 54,
-        electricity: 52,
-        internet: 2,
-        appliances: 35
-      },
-      lastUpdated: '45 minutes ago'
+      lastUpdated: '5 hours ago',
+      status: 'Active'
     }
   ];
+
+  filteredVillages: VillageData[] = this.villages;
+
+  onFilterChange(filter: string) {
+    if (filter === 'All') {
+      this.filteredVillages = this.villages;
+    } else {
+      this.filteredVillages = this.villages.filter(village => 
+        village.status === filter || 
+        (filter === 'Others' && village.status !== 'Active' && village.status !== 'Maintenance')
+      );
+    }
+  }
+
+  onSearchChange(searchTerm: string) {
+    if (!searchTerm) {
+      this.filteredVillages = this.villages;
+      return;
+    }
+    
+    const term = searchTerm.toLowerCase();
+    this.filteredVillages = this.villages.filter(village => 
+      village.name.toLowerCase().includes(term)
+    );
+  }
+
+  // Add to your Villages class
+  pageSize = 4;
+  currentPage = 0;
+  
+  get paginatedVillages() {
+    const start = this.currentPage * this.pageSize;
+    return this.filteredVillages.slice(start, start + this.pageSize);
+  }
+  
+  nextPage() {
+    if ((this.currentPage + 1) * this.pageSize < this.filteredVillages.length) {
+      this.currentPage++;
+    }
+  }
+  
+  prevPage() {
+    if (this.currentPage > 0) {
+      this.currentPage--;
+    }
+  }
 }

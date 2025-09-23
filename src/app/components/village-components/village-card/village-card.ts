@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 export interface ResourceUtilization {
@@ -22,6 +22,7 @@ export interface VillageData {
   selector: 'app-village-card',
   standalone: true,
   imports: [CommonModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="village-card">
       <div class="card-header">
@@ -39,78 +40,260 @@ export interface VillageData {
       </div>
 
       <div class="card-metrics">
-        <div class="d-flex justify-content-between mb-3">
+        <div class="d-flex justify-content-between mb-4">
           <div class="metric">
-            <div class="metric-value">{{ data.totalPopulation }}</div>
-            <div class="metric-icon"><i class="fas fa-users"></i></div>
+            <div class="metric-label">Total Residents</div>
+            <div class="metric-value-container">
+              <div class="metric-icon user-icon"><i class="fas fa-users"></i></div>
+              <div class="metric-value">{{ data.totalPopulation }}</div>
+            </div>
+            <div class="metric-trend">+{{ getRandomTrend() }}% this week</div>
           </div>
           <div class="metric">
-            <div class="metric-value">{{ data.energyUsage }}</div>
-            <div class="metric-icon"><i class="fas fa-bolt"></i></div>
+            <div class="metric-label">Energy Usage</div>
+            <div class="metric-value-container">
+              <div class="metric-icon energy-icon"><i class="fas fa-bolt"></i></div>
+              <div class="metric-value">{{ data.energyUsage }}</div>
+            </div>
+            <div class="metric-trend">+{{ getRandomTrend() }}% this week</div>
           </div>
           <div class="metric">
-            <div class="metric-value">{{ data.revenue }}</div>
-            <div class="metric-icon"><i class="fas fa-dollar-sign"></i></div>
+            <div class="metric-label">Total Revenue</div>
+            <div class="metric-value-container">
+              <div class="metric-icon revenue-icon"><i class="fas fa-dollar-sign"></i></div>
+              <div class="metric-value">{{ data.revenue }}</div>
+            </div>
+            <div class="metric-trend">+{{ getRandomTrend() }}% this week</div>
           </div>
         </div>
 
+        <h6 class="resource-title">Resource Utilization</h6>
+        
         <!-- Resource utilization -->
         <div class="resource-utilization">
           <div class="resource-item" *ngFor="let res of resources">
-            <div class="resource-label">
-              <i [class]="res.icon"></i>
-              <span>{{ res.label }}</span>
-            </div>
-            <div class="progress-container">
-              <div class="progress">
-                <div class="progress-bar" 
-                     [class]="res.color"
-                     [style.width.%]="res.value"></div>
+            <div class="resource-header">
+              <div class="resource-label">
+                <i [class]="res.icon"></i>
+                <span>{{ res.label }}</span>
               </div>
               <span class="percentage">{{ res.value }}%</span>
+            </div>
+            <div class="progress">
+              <div class="progress-bar" 
+                   [class]="res.color"
+                   [style.width.%]="res.value"></div>
             </div>
           </div>
         </div>
 
-        <div class="card-footer mt-3">
-          <small class="text-muted">
+        <div class="card-footer mt-4">
+          <button class="btn btn-view">
+            <i class="fas fa-eye me-2"></i>View Details
+          </button>
+          <button class="btn btn-edit">
+            <i class="fas fa-edit me-2"></i>Edit
+          </button>
+          <div class="updated-time">
             <i class="fas fa-clock me-1"></i>
             Updated {{ data.lastUpdated }}
-          </small>
-          <button class="btn btn-link btn-sm text-purple">
-            View Details <i class="fas fa-chevron-right ms-1"></i>
-          </button>
+          </div>
         </div>
       </div>
     </div>
   `,
   styles: [`
-    .village-card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-    .village-icon { width: 32px; height: 32px; background: #f3e9ff; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #9A3FEF; }
-    .status-badge { padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; }
-    .status-active { background: #E8F5E9; color: #2E7D32; }
-    .status-maintenance { background: #FFF3E0; color: #EF6C00; }
-    .status-inactive { background: #FFEBEE; color: #C62828; }
-    .metric { text-align: center; }
-    .metric-value { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
-    .resource-label { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 13px; }
-    .progress-container { display: flex; align-items: center; gap: 10px; }
-    .progress { flex: 1; height: 6px; background: #f5f5f5; border-radius: 3px; overflow: hidden; }
-    .progress-bar { height: 100%; }
-    .bg-purple { background-color: #9A3FEF; }
-    .text-purple { color: #9A3FEF; }
-    .card-footer { display: flex; justify-content: space-between; align-items: center; }
+    .village-card { 
+      background: white; 
+      border-radius: 12px; 
+      padding: 24px; 
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      height: 100%;
+    }
+    .village-icon { 
+      width: 32px; 
+      height: 32px; 
+      background: #f3e9ff; 
+      border-radius: 8px; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      color: #9A3FEF; 
+    }
+    .status-badge { 
+      padding: 4px 10px; 
+      border-radius: 20px; 
+      font-size: 12px; 
+      font-weight: 500; 
+    }
+    .status-active { 
+      background: #E8F5E9; 
+      color: #2E7D32; 
+    }
+    .status-maintenance { 
+      background: #FFF3E0; 
+      color: #EF6C00; 
+    }
+    .status-inactive { 
+      background: #FFEBEE; 
+      color: #C62828; 
+    }
+    .metric { 
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .metric-label {
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 8px;
+    }
+    .metric-value-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .metric-value { 
+      font-size: 20px; 
+      font-weight: 600; 
+    }
+    .metric-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+    .user-icon {
+      background-color: #e8f5e9;
+      color: #2E7D32;
+    }
+    .energy-icon {
+      background-color: #fff3e0;
+      color: #EF6C00;
+    }
+    .revenue-icon {
+      background-color: #e3f2fd;
+      color: #1976D2;
+    }
+    .metric-trend {
+      font-size: 11px;
+      color: #2E7D32;
+    }
+    .resource-title {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+    .resource-utilization {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .resource-item {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .resource-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .resource-label { 
+      display: flex; 
+      align-items: center; 
+      gap: 8px; 
+      font-size: 13px; 
+    }
+    .percentage {
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .progress { 
+      height: 8px; 
+      background: #f5f5f5; 
+      border-radius: 4px; 
+      overflow: hidden; 
+      width: 100%;
+    }
+    .progress-bar { 
+      height: 100%; 
+      border-radius: 4px;
+    }
+    .bg-primary { 
+      background-color: #1976D2; 
+    }
+    .bg-warning { 
+      background-color: #FF9800; 
+    }
+    .bg-success { 
+      background-color: #4CAF50; 
+    }
+    .bg-purple { 
+      background-color: #9A3FEF; 
+    }
+    .card-footer { 
+      display: flex; 
+      justify-content: flex-start; 
+      align-items: center; 
+      gap: 12px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+      position: relative;
+    }
+    .btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-view {
+      background: #f3e9ff;
+      color: #9A3FEF;
+    }
+    .btn-edit {
+      background: #f5f5f5;
+      color: #666;
+    }
+    .updated-time {
+      font-size: 12px;
+      color: #666;
+      position: absolute;
+      right: 0;
+    }
   `]
 })
-export class VillageCardComponent {
+export class VillageCardComponent implements OnInit {
   @Input() data!: VillageData;
-
-  get resources() {
-    return [
+  resources: any[] = [];
+  trendValues: {[key: string]: number} = {};
+  
+  ngOnInit() {
+    // Pre-calculate values once instead of during every change detection cycle
+    this.resources = [
       { label: 'Water Usage', value: this.data.resourceUtilization.waterUsage, icon: 'fas fa-tint text-primary', color: 'bg-primary' },
       { label: 'Electricity', value: this.data.resourceUtilization.electricity, icon: 'fas fa-bolt text-warning', color: 'bg-warning' },
       { label: 'Internet', value: this.data.resourceUtilization.internet, icon: 'fas fa-wifi text-success', color: 'bg-success' },
       { label: 'Appliances', value: this.data.resourceUtilization.appliances, icon: 'fas fa-tv text-purple', color: 'bg-purple' }
     ];
+    
+    // Pre-calculate random trends
+    this.trendValues = {
+      population: this.getRandomTrend(),
+      energy: this.getRandomTrend(),
+      revenue: this.getRandomTrend()
+    };
+  }
+
+  getRandomTrend(): number {
+    return Math.floor(Math.random() * 10) + 1;
   }
 }

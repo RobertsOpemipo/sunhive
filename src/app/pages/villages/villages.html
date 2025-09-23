@@ -1,21 +1,18 @@
 <div class="villages-container">
   <div class="main-content">
     <div class="content-area">
-
-        <div class="stats-grid">
+      <div class="stats-grid">
         <div class="row g-4 mb-4">
           <div class="col-md-3" *ngFor="let stat of statsData">
             <app-stats-card [data]="stat"></app-stats-card>
           </div>
         </div>
       </div>
-      <app-village-header></app-village-header>
+      <app-village-header (filterChanged)="onFilterChange($event)" (searchChanged)="onSearchChange($event)"></app-village-header>
       
-      
-
       <div class="villages-grid">
         <div class="row g-4">
-          <div class="col-md-6" *ngFor="let village of villages">
+          <div class="col-md-6" *ngFor="let village of filteredVillages">
             <app-village-card [data]="village"></app-village-card>
           </div>
         </div>

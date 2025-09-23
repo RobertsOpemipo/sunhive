@@ -1,0 +1,83 @@
+<div class="maintenance-container">
+  <div class="main-content">
+    <div class="content-area">
+      <!-- Status Cards -->
+      <div class="stats-grid">
+        <div class="row g-4 mb-4">
+          <div class="col-md-3">
+            <app-maintenance-status-card
+              type="completed"
+              label="Completed"
+              [count]="3"
+              [total]="8"
+            ></app-maintenance-status-card>
+          </div>
+          <div class="col-md-3">
+            <app-maintenance-status-card
+              type="scheduled"
+              label="Scheduled"
+              [count]="2"
+              [total]="8"
+            ></app-maintenance-status-card>
+          </div>
+          <div class="col-md-3">
+            <app-maintenance-status-card
+              type="in-progress"
+              label="In-progress"
+              [count]="1"
+              [total]="8"
+            ></app-maintenance-status-card>
+          </div>
+          <div class="col-md-3">
+            <app-maintenance-status-card
+              type="overdue"
+              label="Overdue"
+              [count]="2"
+              [total]="8"
+            ></app-maintenance-status-card>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Progress Timeline -->
+      <div class="section-container">
+        <div class="row mb-4">
+          <div class="col-12">
+            <h5 class="section-title">Current Maintenance Progress</h5>
+            <app-progress-timeline
+              [steps]="timelineSteps"
+              [currentPhase]="3"
+              [totalPhases]="5"
+            ></app-progress-timeline>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Tasks and Schedule -->
+      <div class="section-container">
+        <div class="row g-4">
+          <div class="col-md-6">
+            <h5 class="section-title">Maintenance Tasks</h5>
+            <app-task-list
+              [tasks]="maintenanceTasks"
+              title="Maintenance Tasks"
+              [showFilter]="true"
+              [showAddButton]="true"
+              [showStatusFilters]="true"
+              addButtonText="New Task"
+            ></app-task-list>
+          </div>
+          <div class="col-md-6">
+            <h5 class="section-title">Upcoming Schedule</h5>
+            <app-schedule-calendar
+              [events]="upcomingEvents"
+              title="Upcoming Schedule"
+              [showAddButton]="true"
+              addButtonText="Add Event"
+            ></app-schedule-calendar>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

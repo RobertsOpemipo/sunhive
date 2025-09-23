@@ -39,14 +39,84 @@ import { CommonModule } from '@angular/common';
     </div>
   `,
   styles: [`
-    .village-header { padding: 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; }
-    .filter-tabs { display: flex; gap: 12px; }
-    .tab-btn { border: none; background: none; padding: 8px 16px; border-radius: 20px; color: #666; font-size: 14px; }
-    .tab-btn.active { background: #9A3FEF; color: white; }
-    .search-box { display: flex; align-items: center; gap: 8px; background: white; border: 1px solid #ddd; border-radius: 8px; padding: 8px 16px; width: 280px; }
-    .search-box input { border: none; outline: none; width: 100%; }
-    .btn-primary { background: #9A3FEF; border-color: #9A3FEF; }
-    .btn-primary:hover { background: #8034d1; border-color: #8034d1; }
+    .village-header { 
+      padding: 24px; 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      border-bottom: 1px solid #eee;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .header-left {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .filter-tabs { 
+      display: flex; 
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .tab-btn { 
+      border: none; 
+      background: none; 
+      padding: 8px 16px; 
+      border-radius: 20px; 
+      color: #666; 
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .tab-btn:hover {
+      background: rgba(154, 63, 239, 0.1);
+    }
+    .tab-btn.active { 
+      background: #9A3FEF; 
+      color: white; 
+    }
+    .header-right {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .search-box { 
+      display: flex; 
+      align-items: center; 
+      gap: 8px; 
+      background: white; 
+      border: 1px solid #ddd; 
+      border-radius: 8px; 
+      padding: 8px 16px; 
+      width: 280px; 
+    }
+    .search-box input { 
+      border: none; 
+      outline: none; 
+      width: 100%; 
+    }
+    .btn-primary { 
+      background: #9A3FEF; 
+      border-color: #9A3FEF; 
+    }
+    .btn-primary:hover { 
+      background: #8034d1; 
+      border-color: #8034d1; 
+    }
+    
+    @media (max-width: 768px) {
+      .village-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .search-box {
+        width: 100%;
+      }
+      .header-right {
+        width: 100%;
+      }
+    }
   `]
 })
 export class VillageHeaderComponent {
@@ -60,6 +130,7 @@ export class VillageHeaderComponent {
   }
 
   onSearch(event: any) {
-    this.searchChanged.emit(event.target.value);
+    const searchValue = event.target.value.trim();
+    this.searchChanged.emit(searchValue);
   }
 }

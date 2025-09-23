@@ -6,8 +6,7 @@ import { VillageComparison } from "../../components/dashboard-components/village
 import { DoubleChart } from "../../components/dashboard-components/double-chart/double-chart";
 import { GraphGroup } from "../../components/dashboard-components/graph-group/graph-group";
 import { AlertGroup } from "../../components/dashboard-components/alert-group/alert-group";
-import { Navbar } from '../../components/navbar/navbar';
-import { Sidebar } from '../../components/sidebar/sidebar';
+
 
 
 @Component({
@@ -21,8 +20,6 @@ import { Sidebar } from '../../components/sidebar/sidebar';
     DoubleChart, 
     GraphGroup, 
     AlertGroup, 
-    Navbar, 
-    Sidebar
   ],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css'
