@@ -1,0 +1,40 @@
+.stats-card {
+  border-radius: 8px;
+  padding: 16px;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  border-top: 3px solid;
+  height: 100%;
+}
+
+.stats-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stats-value {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.stats-title {
+  font-size: 14px;
+  color: #666;
+}
+
+.blue {
+  border-top-color: #1976D2;
+}
+
+.green {
+  border-top-color: #4CAF50;
+}
+
+.orange {
+  border-top-color: #FF9800;
+}
+
+.red {
+  border-top-color: #F44336;
+}

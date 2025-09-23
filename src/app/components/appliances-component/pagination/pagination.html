@@ -1,0 +1,19 @@
+<div class="pagination-container">
+  <div class="pagination-info">
+    Showing {{ startItem }} to {{ endItem }} of {{ totalItems }} entries
+  </div>
+  
+  <div class="pagination-controls">
+    <button class="btn-page" [disabled]="currentPage === 1" (click)="previousPage()">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    
+    <div class="page-numbers">
+      <span class="current-page">{{ currentPage }}</span> of {{ totalPages }}
+    </div>
+    
+    <button class="btn-page" [disabled]="currentPage === totalPages" (click)="nextPage()">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
+</div>

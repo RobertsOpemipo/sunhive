@@ -1,0 +1,65 @@
+<div class="appliances-container">
+  <div class="main-content">
+    <div class="content-area">
+      <!-- Stats Cards -->
+      <div class="stats-section">
+        <div class="row g-4 mb-4">
+          <div class="col-md-3" *ngFor="let stat of statsData">
+            <app-appliance-stats-card
+              [title]="stat.title"
+              [value]="stat.value"
+              [color]="stat.color"
+            ></app-appliance-stats-card>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Metrics Cards -->
+      <div class="metrics-section">
+        <div class="row g-4 mb-4">
+          <div class="col-md-4" *ngFor="let metric of metricsData">
+            <app-appliance-stats-card
+              [title]="metric.title"
+              [value]="metric.value"
+              [color]="metric.color"
+            ></app-appliance-stats-card>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Filter Bar -->
+      <app-filter-bar
+        (searchChanged)="onSearchChanged($event)"
+        (filterChanged)="onFilterChanged($event)"
+      ></app-filter-bar>
+      
+      <!-- Products Grid -->
+      <div class="products-grid">
+        <div class="row g-4">
+          <div class="col-md-4" *ngFor="let product of paginatedProducts">
+            <app-product-card [product]="product"></app-product-card>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Pagination -->
+      <app-pagination
+        [currentPage]="currentPage"
+        [totalPages]="totalPages"
+        [itemsPerPage]="itemsPerPage"
+        [totalItems]="filteredProducts.length"
+        (pageChanged)="onPageChanged($event)"
+      ></app-pagination>
+      
+      <!-- Recommended Products Section -->
+      <div class="recommended-section">
+        <h5 class="section-title">Recommended Products</h5>
+        <div class="row g-4">
+          <div class="col-md-4" *ngFor="let product of products.slice(0, 3)">
+            <app-product-card [product]="product"></app-product-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="product-card">
+  <div class="product-image">
+    <img [src]="product.image" [alt]="product.title">
+    <div class="status-badge" [ngClass]="getStatusClass()">{{ product.status }}</div>
+  </div>
+  
+  <div class="product-info">
+    <h5 class="product-title">{{ product.title }}</h5>
+    
+    <div class="product-meta">
+      <div class="brand">{{ product.brand }}</div>
+      <div class="price">${{ product.price.toFixed(2) }}</div>
+      <div class="rating">
+        <span class="stars">★★★★★</span>
+        <span class="reviews">{{ product.reviews }} reviews</span>
+      </div>
+      <div class="warranty">{{ product.warranty }} years</div>
+    </div>
+    
+    <div class="financing-options">
+      <h6>Financing Options</h6>
+      <div class="options-container">
+        <div class="option" *ngFor="let option of product.financingOptions; let i = index" 
+             [ngClass]="{'selected': i === selectedFinancingOption}"
+             (click)="selectFinancingOption(i)">
+          <div class="option-months">{{ option.months }} months</div>
+          <div class="option-payment">${{ option.monthlyPayment.toFixed(2) }}</div>
+          <div class="option-total">${{ option.totalAmount.toFixed(2) }}</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="product-actions">
+      <button class="btn-details">View Details</button>
+    </div>
+  </div>
+</div>

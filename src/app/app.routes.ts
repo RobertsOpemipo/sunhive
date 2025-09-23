@@ -6,6 +6,7 @@ import { ReportModal } from './components/dashboard-components/report-modal/repo
 import { ManageUsersComponent } from './components/dashboard-components/manage-users/manage-users';
 import { Villages } from './pages/villages/villages';
 import { MaintenancePage } from './pages/maintenance/maintenance';
+import { Appliances } from './pages/appliances/appliances';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -13,7 +14,8 @@ export const routes: Routes = [
     { path: 'villages', component: Villages },
     { path: 'maintenance-schedule', component: MaintenancePage },
     { path: 'report', component: ReportModal },
-    { path: 'manage-users', component: ManageUsersComponent }
+    { path: 'manage-users', component: ManageUsersComponent },
+    { path: 'appliances', component: Appliances }
 ];
 
 @NgModule({

@@ -1,0 +1,165 @@
+.product-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  height: 100%;
+  transition: transform 0.2s;
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.product-image {
+  position: relative;
+  height: 180px;
+  overflow: hidden;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.status-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.in-stock {
+  background: #E8F5E9;
+  color: #2E7D32;
+}
+
+.low-stock {
+  background: #FFF3E0;
+  color: #EF6C00;
+}
+
+.out-of-stock {
+  background: #FFEBEE;
+  color: #C62828;
+}
+
+.product-info {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.product-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.product-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.brand {
+  color: #666;
+}
+
+.price {
+  font-weight: 600;
+  text-align: right;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.stars {
+  color: #FFC107;
+}
+
+.reviews {
+  color: #666;
+}
+
+.warranty {
+  text-align: right;
+  color: #666;
+}
+
+.financing-options {
+  margin-top: 8px;
+}
+
+.financing-options h6 {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.options-container {
+  display: flex;
+  gap: 8px;
+}
+
+.option {
+  flex: 1;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #eee;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.option.selected {
+  border-color: #4CAF50;
+  background: #E8F5E9;
+}
+
+.option-months {
+  font-size: 12px;
+  color: #666;
+}
+
+.option-payment {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.option-total {
+  font-size: 12px;
+  color: #666;
+}
+
+.product-actions {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-details {
+  width: 100%;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  background: #9A3FEF;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-details:hover {
+  background: #8429E0;
+}
