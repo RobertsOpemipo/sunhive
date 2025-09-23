@@ -1,173 +1,199 @@
-<div class="modal-overlay" [class.active]="isVisible">
-  <div class="modal-container modal-xl">
-    <div class="modal-content">
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h5 class="modal-title">Generate Reports</h5>
-        <button type="button" class="btn-close" aria-label="Close" (click)="onCancel()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
-      <!-- Modal Body -->
-      <div class="modal-body">
-        <div class="reports-container">
-          
-          <!-- Report Types Section -->
-          <div class="reports-section">
-            <div class="section-header">
-              <h6 class="section-title">Select Report Type</h6>
-              <p class="section-subtitle">Choose the type of report you want to generate</p>
-            </div>
-            
-            <div class="reports-grid">
-              <div class="report-card" 
-                   *ngFor="let report of reportTypes"
-                   [class.selected]="selectedReportType === report.id"
-                   (click)="selectReportType(report.id)">
-                <div class="report-icon">
-                  <i [class]="report.icon"></i>
-                </div>
-                <div class="report-content">
-                  <h6 class="report-title">{{report.name}}</h6>
-                  <p class="report-description">{{report.description}}</p>
-                </div>
-              </div>
+<div class="container-fluid p-0">
+  <div class="generate-report-container">
+    <!-- Header Section with Progress -->
+    <div class="card mb-4">
+      <div class="card-body bg-light border rounded-3">
+        <div class="row justify-content-between align-items-center">
+          <div class="col-auto">
+            <div class="header-info">
+              <h5 class="card-title mb-1 text-dark fw-bold">Generate Report</h5>
+              <p class="card-text text-muted mb-0">Configure and generate your custom report</p>
             </div>
           </div>
-
-          <!-- Time Period Section -->
-          <div class="reports-section">
-            <div class="section-header">
-              <h6 class="section-title">Select Time Period</h6>
-              <p class="section-subtitle">Choose the date range for your report</p>
-            </div>
-            
-            <div class="time-period-container">
-              <!-- Time Period Options -->
-              <div class="time-period-column">
-                <div class="time-period-card">
-                  <h6 class="card-title">Time Period</h6>
-                  
-                  <div class="time-options-grid">
-                    <button type="button" 
-                            class="time-option-btn"
-                            [class.selected]="selectedTimePeriod === period.value"
-                            *ngFor="let period of timePeriods"
-                            (click)="selectTimePeriod(period.value)">
-                      {{period.label}}
-                    </button>
-                  </div>
-                  
-                  <!-- Custom Date Range -->
-                  <div class="date-range-section">
-                    <div class="date-range-row">
-                      <div class="date-selector">
-                        <label class="date-label">From Date</label>
-                        <div class="date-input-group">
-                          <input type="date" 
-                                 class="form-control" 
-                                 [(ngModel)]="fromDate"
-                                 placeholder="Select date">
-                          <span class="input-icon">
-                            <i class="fas fa-calendar"></i>
-                          </span>
-                        </div>
-                      </div>
-                      <div class="date-selector">
-                        <label class="date-label">To Date</label>
-                        <div class="date-input-group">
-                          <input type="date" 
-                                 class="form-control" 
-                                 [(ngModel)]="toDate"
-                                 placeholder="Select date">
-                          <span class="input-icon">
-                            <i class="fas fa-calendar"></i>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <!-- Data Filters -->
-              <div class="filter-column">
-                <div class="data-filter-card">
-                  <h6 class="card-title">Data Filters</h6>
-                  
-                  <div class="filter-options">
-                    <div class="filter-item" 
-                         *ngFor="let filter of dataFilters"
-                         (click)="toggleFilter(filter.id)">
-                      <div class="filter-checkbox">
-                        <i class="fas fa-check" 
-                           [class.visible]="isFilterSelected(filter.id)"></i>
-                      </div>
-                      <span class="filter-label">{{filter.label}}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="col-auto">
+            <button class="btn btn-outline-secondary" (click)="onCancel()">
+              <i class="fas fa-times me-2"></i>Cancel
+            </button>
           </div>
-
-          <!-- Export Format Section -->
-          <div class="reports-section">
-            <div class="section-header">
-              <h6 class="section-title">Export Format</h6>
-            </div>
-            
-            <div class="export-formats-grid">
-              <div class="export-format-card" 
-                   *ngFor="let format of exportFormats"
-                   [class.selected]="selectedExportFormat === format.id"
-                   (click)="selectExportFormat(format.id)">
-                <div class="format-icon">
-                  <i [class]="format.icon"></i>
-                </div>
-                <div class="format-content">
-                  <h6 class="format-title">{{format.name}}</h6>
-                  <p class="format-description">{{format.description}}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Delivery Method Section -->
-          <div class="reports-section">
-            <div class="section-header">
-              <h6 class="section-title">Delivery Method</h6>
-            </div>
-            
-            <div class="delivery-methods">
-              <div class="delivery-option" 
-                   *ngFor="let method of deliveryMethods"
-                   [class.selected]="selectedDeliveryMethod === method.id"
-                   (click)="selectDeliveryMethod(method.id)">
-                <div class="delivery-icon">
-                  <i [class]="method.icon"></i>
-                </div>
-                <div class="delivery-content">
-                  <h6 class="delivery-title">{{method.name}}</h6>
-                  <p class="delivery-description">{{method.description}}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
         </div>
       </div>
+    </div>
 
-      <!-- Modal Footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="onCancel()">
-          Cancel
-        </button>
-        <button type="button" class="btn btn-primary" (click)="onGenerateReport()">
-          Generate Report
-        </button>
+    <!-- Report Type Selection -->
+    <div class="mb-5">
+      <div class="section-header mb-4">
+        <i class="fas fa-file-alt me-2"></i>
+        <span class="fw-bold">Select Report Type</span>
+      </div>
+      <div class="row g-3">
+        <div class="col-lg-3 col-md-6" *ngFor="let type of reportTypes">
+          <div class="report-type-card" 
+               [class.selected]="selectedReportType === type.id"
+               (click)="selectReportType(type.id)">
+            <div class="card-icon mb-3">
+              <i [class]="type.icon"></i>
+            </div>
+            <h6 class="report-name text-center fw-bold mb-2">{{type.name}}</h6>
+            <p class="report-desc text-center small mb-0">{{type.description}}</p>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+
+    <!-- Configure Parameters -->
+    <div class="parameters-section mb-5">
+      <div class="section-header">
+        <h2 class="card-title">Configure Parameters</h2>
+        <p class="card-subtitle">Set date ranges & apply filter</p>
+      </div>
+      <div class="parameters-content">
+        <!-- Time Period Column -->
+        <div class="time-period-column">
+          <h3>Time Period</h3>
+          <div class="time-options-grid">
+            <button *ngFor="let type of maintenanceTypes"
+                    class="time-option-btn"
+                    [class.selected]="selectedTimePeriod === type.value"
+                    (click)="selectMaintenanceType(type.value)">
+              {{type.name}}
+            </button>
+          </div>
+          <div class="date-range-inputs">
+            <div class="date-input-group">
+              <label>From Date</label>
+              <input type="text" 
+                     class="form-control" 
+                     [(ngModel)]="fromDate" 
+                     placeholder="01/25/2024">
+            </div>
+            <div class="arrow">→</div>
+            <div class="date-input-group">
+              <label>To Date</label>
+              <input type="text" 
+                     class="form-control" 
+                     [(ngModel)]="toDate" 
+                     placeholder="01/25/2024">
+            </div>
+          </div>
+        </div>
+
+        <!-- Data Filter Column -->
+        <div class="data-filter-column">
+          <h3>Data Filter</h3>
+          <div class="filter-list">
+            <div class="filter-item" *ngFor="let filter of dataFilters">
+              <div class="filter-checkbox" 
+                   [class.selected]="isFilterSelected(filter.id)"
+                   (click)="toggleFilter(filter.id)">
+                <i class="fas fa-check"></i>
+              </div>
+              <span class="filter-label">{{filter.label}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Output Format -->
+    <div class="output-format-section mb-5">
+      <h2 class="section-title">Output Format</h2>
+      <div class="output-formats-grid">
+        <div class="format-card" 
+             [class.selected]="selectedExportFormat === 'pdf'"
+             (click)="selectExportFormat('pdf')">
+          <div class="format-icon">
+            <i class="fas fa-file-pdf"></i>
+          </div>
+          <div class="format-content">
+            <h3>PDF</h3>
+            <p>Print-ready document</p>
+          </div>
+        </div>
+
+        <div class="format-card" 
+             [class.selected]="selectedExportFormat === 'excel'"
+             (click)="selectExportFormat('excel')">
+          <div class="format-icon">
+            <i class="fas fa-file-excel"></i>
+          </div>
+          <div class="format-content">
+            <h3>Excel</h3>
+            <p>Data analysis format</p>
+          </div>
+        </div>
+
+        <div class="format-card" 
+             [class.selected]="selectedExportFormat === 'csv'"
+             (click)="selectExportFormat('csv')">
+          <div class="format-icon">
+            <i class="fas fa-file-csv"></i>
+          </div>
+          <div class="format-content">
+            <h3>CSV</h3>
+            <p>Raw data format</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Download Method -->
+    <div class="download-method-section mb-5">
+      <h2 class="section-title">Download Method</h2>
+      <div class="download-options">
+        <div class="method-card" 
+             [class.selected]="selectedDeliveryMethod === 'instant'"
+             (click)="selectDeliveryMethod('instant')">
+          <div class="method-checkbox">
+            <i class="fas fa-check"></i>
+          </div>
+          <div class="method-content">
+            <h3>Instant Download</h3>
+            <p>Generate and download immediately to your choice</p>
+          </div>
+        </div>
+
+        <div class="method-card"
+             [class.selected]="selectedDeliveryMethod === 'email'"
+             (click)="selectDeliveryMethod('email')">
+          <div class="method-checkbox">
+            <i class="fas fa-check"></i>
+          </div>
+          <div class="method-content">
+            <h3>Send to email</h3>
+            <p>Send reports to your email address in a secure links</p>
+          </div>
+        </div>
+
+        <div class="method-card"
+             [class.selected]="selectedDeliveryMethod === 'schedule'"
+             (click)="selectDeliveryMethod('schedule')">
+          <div class="method-checkbox">
+            <i class="fas fa-check"></i>
+          </div>
+          <div class="method-content">
+            <h3>Schedule Report</h3>
+            <p>Set up automatic report generation</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+   
+
+
+
+    <!-- Footer Message -->
+    <div class="report-note mb-4">
+      <p class="text-muted"><i class="fas fa-clock me-2"></i>Report generation typically takes 30-60 seconds</p>
+    </div>
+
+    <!-- Generate Report Button -->
+    <div class="generate-actions">
+      <button class="btn btn-link text-muted" (click)="onCancel()">Cancel</button>
+      <button class="btn btn-primary px-4" 
+              [disabled]="!isFormValid()"
+              (click)="onGenerateReport()">
+        Generate Report
+      </button>
+    </div>
+

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { Dashboard } from './pages/dashboard/dashboard';
 import { Maintenance } from './pages/maintenance/maintenance'; 
 import { ReportModal } from './pages/report-modal/report-modal';
+import { ManageUsersComponent } from './pages/manage-users/manage-users';
 
 
 export const routes: Routes = [
@@ -10,9 +11,7 @@ export const routes: Routes = [
     { path: 'dashboard', component: Dashboard },
     { path: 'maintenance', component: Maintenance },
     { path: 'report', component: ReportModal },
-
-    // Example placeholder
-    // { path: 'users', component: UsersComponent }
+    { path: 'manage-users', component: ManageUsersComponent }
 ];
 
 @NgModule({

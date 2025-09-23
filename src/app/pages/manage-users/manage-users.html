@@ -1,0 +1,138 @@
+<div class="manage-users">
+  <div class="header">
+    <div class="title-section">
+      <h1>Manage User</h1>
+      <p class="subtitle">Advanced user administration & access control</p>
+    </div>
+    <button class="close-button" (click)="closeManageUsers()">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <div class="stats">
+    <div class="stat-item">
+      <div class="stat-value">{{stats.totalMembers}}</div>
+      <div class="stat-label">Total members</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">{{stats.active}}</div>
+      <div class="stat-label">Active</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">{{stats.online}}</div>
+      <div class="stat-label">Online</div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <div class="search-bar">
+      <i class="fas fa-search"></i>
+      <input type="text" [(ngModel)]="searchQuery" (ngModelChange)="onSearchChange()" placeholder="Search team member by name, email address or role...">
+    </div>
+    
+    <div class="filters">
+      <button *ngFor="let filter of filters" 
+              [class.active]="selectedFilter === filter"
+              (click)="onFilterChange(filter)">
+        {{filter}}
+      </button>
+    </div>
+
+    <button class="add-user-btn" (click)="addUser()">
+      <i class="fas fa-plus"></i>
+      Add User
+    </button>
+  </div>
+
+  <div class="users-table">
+    <table>
+      <thead>
+        <tr>
+          <th>
+            <input type="checkbox" 
+                   [checked]="selectedUsers.length === paginatedUsers.length"
+                   (change)="selectAllUsers()">
+          </th>
+          <th>Profile</th>
+          <th>Role</th>
+          <th>Status</th>
+          <th>Last seen</th>
+          <th>Permission</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of paginatedUsers">
+          <td>
+            <input type="checkbox" 
+                   [checked]="selectedUsers.includes(user.id)"
+                   (change)="toggleUserSelection(user.id)">
+          </td>
+          <td class="profile-cell">
+            <img [src]="user.avatar" [alt]="user.name">
+            <div class="user-info">
+              <div class="name">{{user.name}}</div>
+              <div class="email">{{user.email}}</div>
+            </div>
+          </td>
+          <td>
+            <span class="role-badge" [class]="getRoleClass(user.role)">
+              {{user.role}}
+            </span>
+          </td>
+          <td>
+            <span class="status-indicator" [class]="getStatusClass(user.status)">
+              <i class="fas fa-circle"></i>
+              {{user.status}}
+            </span>
+          </td>
+          <td>{{user.lastSeen}}</td>
+          <td>
+            <span class="permission-badge" [class]="getPermissionClass(user.permission)">
+              {{user.permission}}
+            </span>
+          </td>
+          <td class="actions">
+            <button class="action-btn">
+              <i class="fas fa-eye"></i>
+            </button>
+            <button class="action-btn">
+              <i class="fas fa-key"></i>
+            </button>
+            <button class="action-btn">
+              <i class="fas fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="table-footer">
+    <div class="pagination">
+      <span>Showing {{(currentPage - 1) * itemsPerPage + 1}}-{{Math.min(currentPage * itemsPerPage, filteredUsers.length)}} of {{filteredUsers.length}} entries</span>
+      <div class="pagination-controls">
+        <button class="page-btn" [disabled]="currentPage === 1" (click)="onPageChange(currentPage - 1)">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <ng-container *ngFor="let page of [].constructor(totalPages); let i = index">
+          <button class="page-number" 
+                  [class.active]="currentPage === i + 1"
+                  (click)="onPageChange(i + 1)">
+            {{i + 1}}
+          </button>
+        </ng-container>
+        <button class="page-btn" [disabled]="currentPage === totalPages" (click)="onPageChange(currentPage + 1)">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+    <div class="selection-info" *ngIf="selectedUsers.length > 0">
+      {{selectedUsers.length}} users selected, {{stats.active}} total active users
+    </div>
+    <div class="action-buttons">
+      <button class="export-btn" (click)="exportData()">Export Data</button>
+      <button class="apply-btn" (click)="applyChanges()">Apply Changes</button>
+    </div>
+  </div>
+</div>

@@ -6,11 +6,11 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-report-modal',
   templateUrl: './report-modal.html',
-  imports: [CommonModule,FormsModule],
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   styleUrls: ['./report-modal.css']
 })
 export class ReportModal implements OnInit {
-  @Input() isVisible: boolean = false;
   @Output() modalClose = new EventEmitter<void>();
   @Output() reportGenerated = new EventEmitter<any>();
 
@@ -27,32 +27,32 @@ export class ReportModal implements OnInit {
   reportTypes = [
     {
       id: 'energy',
-      name: 'Energy Report',
-      description: 'Generate report on energy consumption and efficiency metrics',
+      name: 'Energy Usage Report',
+      description: 'Comprehensive energy consumption, patterns and trends',
       icon: 'fas fa-bolt'
     },
     {
       id: 'water',
-      name: 'Water Report',
-      description: 'Generate report on water usage and conservation data',
+      name: 'Water Usage Report',
+      description: 'Detailed water consumption metrics and efficiency analysis',
       icon: 'fas fa-tint'
     },
     {
       id: 'user-activity',
       name: 'User Activity Report',
-      description: 'Generate report on user activities and system interactions',
+      description: 'User engagement metrics and system usage pattern',
       icon: 'fas fa-users'
     },
     {
       id: 'financial',
       name: 'Financial Report',
-      description: 'Generate report on financial transactions and budgets',
+      description: 'Revenue, expenses, and financial performance analysis',
       icon: 'fas fa-chart-line'
     },
     {
       id: 'village-overview',
       name: 'Village Overview',
-      description: 'Generate comprehensive village performance overview',
+      description: 'Comprehensive village performance & statistics summary',
       icon: 'fas fa-home'
     }
   ];
@@ -98,20 +98,19 @@ export class ReportModal implements OnInit {
     {
       id: 'instant',
       name: 'Instant Download',
-      description: 'Generate and download immediately to your device',
+      description: 'Generate and download immediately to your choice',
       icon: 'fas fa-download'
     },
     {
       id: 'email',
       name: 'Send to email',
-      description: 'Send reports to your email address via secure links',
+      description: 'Send reports to your email address in a secure links', 
       icon: 'fas fa-envelope'
     },
     {
       id: 'schedule',
       name: 'Schedule Report',
-      description: 'Set up automatic report generation and delivery',
-      icon: 'fas fa-clock'
+      description: 'Set up automatic report generation', icon: 'fas fa-calendar-alt'
     }
   ];
 
@@ -171,14 +170,14 @@ export class ReportModal implements OnInit {
     let startDate = new Date();
 
     switch (period) {
+      case 'last-7-days':
+        startDate.setDate(today.getDate() - 7);
+        break;
       case 'last-30-days':
         startDate.setDate(today.getDate() - 30);
         break;
       case 'last-quarter':
         startDate.setMonth(today.getMonth() - 3);
-        break;
-      case 'last-6-months':
-        startDate.setMonth(today.getMonth() - 6);
         break;
       case 'last-year':
         startDate.setFullYear(today.getFullYear() - 1);
@@ -261,4 +260,21 @@ export class ReportModal implements OnInit {
     this.fromDate = this.formatDate(thirtyDaysAgo);
     this.toDate = this.formatDate(today);
   }
+
+  maintenanceTypes = [
+    { name: 'Last week', value: 'last-7-days' },
+    { name: 'Last month', value: 'last-30-days' },
+    { name: 'Last Quarter', value: 'last-quarter' },
+    { name: 'This year', value: 'last-year' }
+  ];
+
+  additionalNotes: string = '';
+
+
+  selectMaintenanceType(type: string) {
+    this.selectedTimePeriod = type;
+    this.setDateRangeForPeriod(type);
+  }
+
+
 }

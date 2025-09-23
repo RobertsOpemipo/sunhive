@@ -3,8 +3,10 @@ import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { Chart, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement } from 'chart.js';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from "@angular/material/icon";
+import { Router } from '@angular/router';
 import { Maintenance } from '../../pages/maintenance/maintenance';
 import { ReportModal } from '../../pages/report-modal/report-modal';
+import { ManageUsersComponent } from '../../pages/manage-users/manage-users';
 
 Chart.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement);
 
@@ -49,7 +51,7 @@ export class GraphGroup implements AfterViewInit {
     { name: 'Mike Lee', role: 'Manager', avatar: 'assets/avatars/man2.png' }
   ];
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog, private router: Router) { }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
@@ -138,7 +140,13 @@ export class GraphGroup implements AfterViewInit {
 
   openReportModal(): void {
     this.dialog.open(ReportModal, {
-      width: '600px',
+      width: '900px',
+    });
+  }
+
+  navigateToManageUsers(): void {
+    this.dialog.open(ManageUsersComponent, {
+      width: '900px',
     });
   }
 }
