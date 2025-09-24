@@ -1,26 +1,46 @@
 <div class="filter-bar">
-  <div class="filter-tabs">
-    <button *ngFor="let filter of filters" 
-            class="filter-tab" 
-            [ngClass]="{'active': activeFilter === filter.value}"
-            (click)="setFilter(filter.value)">
-      {{ filter.label }}
+  <!-- Top Tabs -->
+  <div class="tabs">
+    <button *ngFor="let tab of tabs"
+            class="tab btn btn-light w-100"
+            [ngClass]="{ 'active': activeTab === tab.value }"
+            (click)="setTab(tab.value)">
+      {{ tab.label }}
     </button>
   </div>
-  
-  <div class="search-container">
-    <input type="text" 
-           class="search-input" 
-           placeholder="Search appliances..." 
-           [(ngModel)]="searchTerm"
-           (input)="onSearch()">
-    <button class="btn-search">
-      <i class="fas fa-search"></i>
-    </button>
-    
-    <button class="btn-filter">
-      <i class="fas fa-filter"></i>
-      Filter
-    </button>
+
+  <!-- Controls Row -->
+  <div class="controls">
+    <div class="search input-group">
+      <span class="input-group-text bg-white border-light-subtle"><i class="fas fa-search"></i></span>
+      <input
+        type="text"
+        class="form-control search-input"
+        [placeholder]="placeholder"
+        [(ngModel)]="searchTerm"
+        (input)="onSearch()"
+      />
+    </div>
+
+    <div class="dropdowns">
+      <select class="select form-select" [(ngModel)]="selectedCategory" (ngModelChange)="onCategoryChange($event)">
+        <option *ngFor="let c of categories" [value]="c">{{ c }}</option>
+      </select>
+
+      <select class="select form-select" [(ngModel)]="selectedStatus" (ngModelChange)="onStatusChange($event)">
+        <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
+      </select>
+    </div>
+
+    <div class="view-toggle">
+      <button class="toggle btn btn-outline-secondary" [ngClass]="{ 'active': viewMode === 'grid' }" (click)="toggleView('grid')">
+        <i class="fas fa-th-large"></i>
+        Grid
+      </button>
+      <button class="toggle btn btn-outline-secondary" [ngClass]="{ 'active': viewMode === 'list' }" (click)="toggleView('list')">
+        <i class="fas fa-list"></i>
+        List
+      </button>
+    </div>
   </div>
 </div>
